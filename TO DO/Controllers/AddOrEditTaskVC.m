@@ -11,13 +11,11 @@
 #import "AddOrEditDelegate.h"
 #import "NSDate+DateExt.h"
 #import "NSString+NSStringExt.h"
-#import "ManageTasks.h"
 
 
 @interface AddOrEditTaskVC ()
 {
     TasksData* task;
-    ManageTasks* manager ;
 }
 @property (weak, nonatomic) IBOutlet UITextField *nameTxt;
 @property (weak, nonatomic) IBOutlet UITextField *descTxt;
@@ -33,7 +31,6 @@
     [super viewDidLoad];
 
     task = [TasksData new];
-    manager = [ManageTasks new];
     
 }
 -(void) viewWillAppear:(BOOL)animated
@@ -66,9 +63,6 @@
         _index = -1;
         [self saveTask];
     }
-    
-    
-    
 }
 -(void)saveTask
 {
