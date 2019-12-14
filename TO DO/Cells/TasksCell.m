@@ -6,9 +6,9 @@
 //  Copyright © 2019 Asmaa Tarek. All rights reserved.
 //
 
-#import "TableViewCell.h"
+#import "TasksCell.h"
 
-@implementation TableViewCell
+@implementation TasksCell
 
 - (void)awakeFromNib {
     [super awakeFromNib];

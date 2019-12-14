@@ -10,10 +10,10 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface TableViewCell : UITableViewCell
+@interface TasksCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UILabel *priorityLbl;
 @property (weak, nonatomic) IBOutlet UILabel *progressLbl;
-@property (weak, nonatomic) IBOutlet UILabel *taskName;
+@property (weak, nonatomic) IBOutlet UILabel *taskNameLbl;
 
 
 @end
