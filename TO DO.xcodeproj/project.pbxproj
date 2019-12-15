@@ -7,7 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		76D83AF623A4108200455158 /* TableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 76D83AF523A4108200455158 /* TableViewCell.m */; };
+		764E0D7123A53F4B007A193C /* DoneVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 764E0D7023A53F4B007A193C /* DoneVC.m */; };
+		764E0D7423A53F62007A193C /* PriorityVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 764E0D7323A53F62007A193C /* PriorityVC.m */; };
+		764E0D7723A53F7A007A193C /* DoneCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 764E0D7623A53F7A007A193C /* DoneCell.m */; };
+		764E0D7A23A53F95007A193C /* PriorityCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 764E0D7923A53F95007A193C /* PriorityCell.m */; };
+		764E0D7D23A55375007A193C /* LocalStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 764E0D7C23A55375007A193C /* LocalStore.m */; };
+		7651980123A4E78D0064A867 /* progressVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7651980023A4E78D0064A867 /* progressVC.m */; };
+		7651980523A4FE910064A867 /* progressCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7651980423A4FE910064A867 /* progressCell.m */; };
+		76D83AF623A4108200455158 /* TasksCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 76D83AF523A4108200455158 /* TasksCell.m */; };
 		76D83AFA23A4396C00455158 /* NSString+NSStringExt.m in Sources */ = {isa = PBXBuildFile; fileRef = 76D83AF923A4396C00455158 /* NSString+NSStringExt.m */; };
 		76D83AFD23A4456B00455158 /* DetailsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 76D83AFC23A4456B00455158 /* DetailsVC.m */; };
 		76D8975B23A3C05500CD15DE /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 76D8975A23A3C05500CD15DE /* AppDelegate.m */; };
@@ -24,8 +31,22 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		76D83AF423A4108200455158 /* TableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TableViewCell.h; sourceTree = "<group>"; };
-		76D83AF523A4108200455158 /* TableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TableViewCell.m; sourceTree = "<group>"; };
+		764E0D6F23A53F4B007A193C /* DoneVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DoneVC.h; sourceTree = "<group>"; };
+		764E0D7023A53F4B007A193C /* DoneVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DoneVC.m; sourceTree = "<group>"; };
+		764E0D7223A53F62007A193C /* PriorityVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PriorityVC.h; sourceTree = "<group>"; };
+		764E0D7323A53F62007A193C /* PriorityVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PriorityVC.m; sourceTree = "<group>"; };
+		764E0D7523A53F7A007A193C /* DoneCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DoneCell.h; sourceTree = "<group>"; };
+		764E0D7623A53F7A007A193C /* DoneCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DoneCell.m; sourceTree = "<group>"; };
+		764E0D7823A53F95007A193C /* PriorityCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PriorityCell.h; sourceTree = "<group>"; };
+		764E0D7923A53F95007A193C /* PriorityCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PriorityCell.m; sourceTree = "<group>"; };
+		764E0D7B23A55375007A193C /* LocalStore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LocalStore.h; sourceTree = "<group>"; };
+		764E0D7C23A55375007A193C /* LocalStore.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LocalStore.m; sourceTree = "<group>"; };
+		765197FF23A4E78D0064A867 /* progressVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = progressVC.h; sourceTree = "<group>"; };
+		7651980023A4E78D0064A867 /* progressVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = progressVC.m; sourceTree = "<group>"; };
+		7651980323A4FE910064A867 /* progressCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = progressCell.h; sourceTree = "<group>"; };
+		7651980423A4FE910064A867 /* progressCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = progressCell.m; sourceTree = "<group>"; };
+		76D83AF423A4108200455158 /* TasksCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TasksCell.h; sourceTree = "<group>"; };
+		76D83AF523A4108200455158 /* TasksCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TasksCell.m; sourceTree = "<group>"; };
 		76D83AF823A4396C00455158 /* NSString+NSStringExt.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSString+NSStringExt.h"; sourceTree = "<group>"; };
 		76D83AF923A4396C00455158 /* NSString+NSStringExt.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSString+NSStringExt.m"; sourceTree = "<group>"; };
 		76D83AFB23A4456B00455158 /* DetailsVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DetailsVC.h; sourceTree = "<group>"; };
@@ -64,6 +85,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7651980223A4FE270064A867 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				76D83AF423A4108200455158 /* TasksCell.h */,
+				76D83AF523A4108200455158 /* TasksCell.m */,
+				7651980323A4FE910064A867 /* progressCell.h */,
+				7651980423A4FE910064A867 /* progressCell.m */,
+				764E0D7523A53F7A007A193C /* DoneCell.h */,
+				764E0D7623A53F7A007A193C /* DoneCell.m */,
+				764E0D7823A53F95007A193C /* PriorityCell.h */,
+				764E0D7923A53F95007A193C /* PriorityCell.m */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
 		76D83AF723A4393E00455158 /* Categories */ = {
 			isa = PBXGroup;
 			children = (
@@ -110,8 +146,9 @@
 				76D8977A23A3E7E400CD15DE /* ManageTasks.m */,
 				76D8978723A409EC00CD15DE /* Protocols */,
 				76D83AF723A4393E00455158 /* Categories */,
-				76D83AF423A4108200455158 /* TableViewCell.h */,
-				76D83AF523A4108200455158 /* TableViewCell.m */,
+				7651980223A4FE270064A867 /* Cells */,
+				764E0D7B23A55375007A193C /* LocalStore.h */,
+				764E0D7C23A55375007A193C /* LocalStore.m */,
 			);
 			path = "TO DO";
 			sourceTree = "<group>";
@@ -133,6 +170,12 @@
 				76D8978023A3F67600CD15DE /* AddOrEditTaskVC.m */,
 				76D83AFB23A4456B00455158 /* DetailsVC.h */,
 				76D83AFC23A4456B00455158 /* DetailsVC.m */,
+				765197FF23A4E78D0064A867 /* progressVC.h */,
+				7651980023A4E78D0064A867 /* progressVC.m */,
+				764E0D6F23A53F4B007A193C /* DoneVC.h */,
+				764E0D7023A53F4B007A193C /* DoneVC.m */,
+				764E0D7223A53F62007A193C /* PriorityVC.h */,
+				764E0D7323A53F62007A193C /* PriorityVC.m */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -208,14 +251,21 @@
 			buildActionMask = 2147483647;
 			files = (
 				76D8976123A3C05500CD15DE /* TasksVC.m in Sources */,
+				764E0D7A23A53F95007A193C /* PriorityCell.m in Sources */,
 				76D8977B23A3E7E400CD15DE /* ManageTasks.m in Sources */,
+				764E0D7D23A55375007A193C /* LocalStore.m in Sources */,
 				76D8975B23A3C05500CD15DE /* AppDelegate.m in Sources */,
 				76D83AFA23A4396C00455158 /* NSString+NSStringExt.m in Sources */,
+				764E0D7123A53F4B007A193C /* DoneVC.m in Sources */,
 				76D8978123A3F67600CD15DE /* AddOrEditTaskVC.m in Sources */,
+				7651980523A4FE910064A867 /* progressCell.m in Sources */,
+				7651980123A4E78D0064A867 /* progressVC.m in Sources */,
 				76D83AFD23A4456B00455158 /* DetailsVC.m in Sources */,
-				76D83AF623A4108200455158 /* TableViewCell.m in Sources */,
+				76D83AF623A4108200455158 /* TasksCell.m in Sources */,
 				76D8978A23A40AD500CD15DE /* NSDate+DateExt.m in Sources */,
+				764E0D7723A53F7A007A193C /* DoneCell.m in Sources */,
 				76D8977823A3E24E00CD15DE /* TasksData.m in Sources */,
+				764E0D7423A53F62007A193C /* PriorityVC.m in Sources */,
 				76D8976C23A3C05B00CD15DE /* main.m in Sources */,
 				76D8975E23A3C05500CD15DE /* SceneDelegate.m in Sources */,
 			);

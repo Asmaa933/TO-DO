@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface TasksData : NSObject
+@interface TasksData : NSObject<NSCoding>
   @property NSString* taskName;
   @property NSString* taskDesc;
   @property NSString* taskDate;

@@ -11,19 +11,20 @@
 #import "ManageTasks.h"
 #import "AddOrEditTaskVC.h"
 #import "AddOrEditDelegate.h"
-#import "TableViewCell.h"
+#import "TasksCell.h"
 #import "NSDate+DateExt.h"
 #import "DetailsVC.h"
+#import "LocalStore.h"
 
 @interface TasksVC ()
 {
-    
     ManageTasks* manager;
     AddOrEditTaskVC* addOrEdit;
     DetailsVC* detail;
     BOOL isFiltered;
-    NSArray* filteredArr;
-    
+    NSMutableArray* filteredArr;
+
+    LocalStore* local;
 }
 @property (weak, nonatomic) IBOutlet UITableView *tasksTable;
 @property (weak, nonatomic) IBOutlet UISearchBar *taskSearch;
@@ -31,19 +32,21 @@
 @end
 
 @implementation TasksVC
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    isFiltered = NO;
+   
     manager = [ManageTasks new];
-    filteredArr = [NSMutableArray new];
     addOrEdit = [self.storyboard instantiateViewControllerWithIdentifier:@"addOrEdit"];
     detail = [self.storyboard instantiateViewControllerWithIdentifier:@"detail"];
-    
     addOrEdit.delegate = self;
-}
 
+       isFiltered = NO;
+}
+- (void)viewWillDisappear:(BOOL)animated
+{
+  //  [local saveToDefault:[manager getAllTasks]];
+}
 - (IBAction)addBtnTapped:(UIBarButtonItem *)sender
 {
     addOrEdit.isEdit = NO;
@@ -55,13 +58,13 @@
     if(index == -1)
     {
         [manager addTask:task];
-        
     }
     else
     {
-        [manager editTask:task :index];
+     [manager editTask:task :index];
     }
     [_tasksTable reloadData];
+    
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -83,18 +86,28 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    TableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
-    if ([[[[manager getAllTasks] objectAtIndex:0] taskName] isEqual:@""])
-    {
-        cell.accessoryType = UITableViewScrollPositionNone;
-    }
+    NSMutableArray* arr = [NSMutableArray new];
+    TasksCell *cell = [tableView dequeueReusableCellWithIdentifier:@"taskCell" forIndexPath:indexPath];
+   if ([[[[manager getAllTasks] objectAtIndex:0] taskName] isEqual:@""])
+      {
+          cell.accessoryType = UITableViewScrollPositionNone;
+      }
+      else
+      {
+          cell.accessoryType = UITableViewCellAccessoryDetailDisclosureButton;
+          
+      }
+    if(isFiltered)
+   {
+       arr = filteredArr;
+       
+   }
     else
     {
-        cell.accessoryType = UITableViewCellAccessoryDetailDisclosureButton;
-        
+        arr =[manager getAllTasks];
     }
-    cell.taskName.text = [[[manager getAllTasks] objectAtIndex:indexPath.row] taskName ];
-    switch ([[[manager getAllTasks] objectAtIndex:indexPath.row] priorty]) {
+    cell.taskNameLbl.text = [[arr objectAtIndex:indexPath.row] taskName ];
+    switch ([[arr objectAtIndex:indexPath.row] priorty]) {
         case 0:
             cell.priorityLbl.text = @"🟢";
             break;
@@ -108,7 +121,7 @@
             cell.priorityLbl.text = @"";
             break;
     }
-    switch ([[[manager getAllTasks] objectAtIndex:indexPath.row] prog]) {
+    switch ([[arr objectAtIndex:indexPath.row] prog]) {
         case 0:
             cell.progressLbl.text = @"🔜";
             break;
@@ -140,7 +153,7 @@
 {
     addOrEdit.isEdit = YES;
     addOrEdit.editTask = [[manager getAllTasks] objectAtIndex:indexPath.row];
-    addOrEdit.index = (int) indexPath.row;
+    addOrEdit.indexNum = (int) indexPath.row;
     [self.navigationController pushViewController:addOrEdit animated:YES];
 }
 
@@ -156,20 +169,36 @@
     isFiltered = YES;
 }
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
-
 {
+    filteredArr = [NSMutableArray new];
     if(searchText.length==0)
     {
+        TasksData* t1 = [TasksData new];
+        t1.priorty = 4;
+        t1.prog = 4;
+        t1.reminderDate = [[NSDate date]changeToString];
+        t1.taskDate = [[NSDate date]changeToString];
+        t1.taskName = @"";
+        t1.taskDesc = @"";
+        [filteredArr  addObject: t1];
         isFiltered=NO;
     }
     
     else
     {
-        filteredArr = [NSArray new];
-            NSPredicate *predicate = [NSPredicate predicateWithFormat:@"taskName CONTAINS[cd] %@", searchText];
-        //    filteredArr = [[manager getAllTasks] filteredArrayUsingPredicate:predicate];
-      
+        isFiltered=YES;
+        for (int i =0 ; i<[[manager getAllTasks] count]; i++) {
+            NSRange stringRange = [[[[manager getAllTasks] objectAtIndex:i]taskName] rangeOfString:searchText options:NSCaseInsensitiveSearch];
+            if(stringRange.location != NSNotFound)
+            {
+            [filteredArr addObject:[[manager getAllTasks] objectAtIndex:i]];
+            }
+        }
+
+
 }
+    [_tasksTable reloadData];
+
 }
 -(void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
 {
@@ -181,6 +210,10 @@
     isFiltered=NO;
     [_tasksTable reloadData];
 
+}
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
+    [self.view endEditing:YES];
 }
 
 @end

@@ -16,7 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property BOOL isEdit;
 @property id <AddOrEditDelegate> delegate;
 @property TasksData* editTask;
-@property int index;
+@property int indexNum;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -9,9 +9,13 @@
 #import "ManageTasks.h"
 #import "TasksData.h"
 #import "NSDate+DateExt.h"
+#import "LocalStore.h"
+
 @implementation ManageTasks
 {
 NSMutableArray* taskArr;
+   LocalStore* local;
+  
 }
 
 - (instancetype)init
@@ -26,7 +30,8 @@ NSMutableArray* taskArr;
             t1.taskName = @"";
             t1.taskDesc = @"";
         taskArr =  [[NSMutableArray alloc] initWithObjects:t1, nil];
-           
+         local = [LocalStore new];
+      
     }
     return self;
 }
@@ -37,10 +42,14 @@ NSMutableArray* taskArr;
         [self deleteTask:0];
     }
     [taskArr addObject:task];
+    [local saveToDefault:taskArr];
 }
 -(void) deleteTask : (int) index
 {
     [taskArr removeObjectAtIndex:index];
+  [local saveToDefault:taskArr];
+
+
 }
 -(NSMutableArray*) getAllTasks
 {
@@ -50,6 +59,8 @@ NSMutableArray* taskArr;
 {
 
     [taskArr replaceObjectAtIndex:index withObject:task];
+    [local saveToDefault:taskArr];
+
 }
 
 

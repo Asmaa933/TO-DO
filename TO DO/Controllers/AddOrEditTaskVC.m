@@ -15,7 +15,7 @@
 
 @interface AddOrEditTaskVC ()
 {
-    TasksData* task;
+    TasksData* addTask;
 }
 @property (weak, nonatomic) IBOutlet UITextField *nameTxt;
 @property (weak, nonatomic) IBOutlet UITextField *descTxt;
@@ -30,13 +30,15 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    task = [TasksData new];
     
 }
 -(void) viewWillAppear:(BOOL)animated
 {
+    addTask = [TasksData new];
+    [_nameTxt becomeFirstResponder];
     if(_isEdit)
     {
+
         self.navigationItem.title = @"Edit Task";
         _nameTxt.text = _editTask.taskName;
         _descTxt.text = _editTask.taskDesc;
@@ -60,19 +62,19 @@
     }
     else
     {
-        _index = -1;
+        _indexNum = -1;
         [self saveTask];
     }
 }
 -(void)saveTask
 {
-    task.taskName = _nameTxt.text;
-    task.taskDesc = _descTxt.text;
-    task.taskDate = [[NSDate date] changeToString];
-    task.priorty =  (int) _prioritySegment.selectedSegmentIndex;
-    task.prog = (int) _progressSegment.selectedSegmentIndex;
-    task.reminderDate = [_reminderDatePicker.date changeToString];
-    [_delegate saveTask:task : _index];
+    addTask.taskName = _nameTxt.text;
+    addTask.taskDesc = _descTxt.text;
+    addTask.taskDate = [[NSDate date] changeToString];
+    addTask.priorty =  (int) _prioritySegment.selectedSegmentIndex;
+    addTask.prog = (int) _progressSegment.selectedSegmentIndex;
+    addTask.reminderDate = [_reminderDatePicker.date changeToString];
+    [_delegate saveTask:addTask : _indexNum];
     [self resetData];
     [self.navigationController popViewControllerAnimated:YES];
 }
@@ -103,6 +105,7 @@
     _progressSegment.selectedSegmentIndex = 0;
     _reminderDatePicker.date = [NSDate date];
     _isEdit = NO;
+    
 }
 
 

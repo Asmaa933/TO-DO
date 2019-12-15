@@ -17,7 +17,6 @@
 @implementation progressVC
 {
     NSMutableArray* progressTasks;
-        NSUserDefaults *defaults;
     TasksData* object;
     NSString* mark;
 }
@@ -25,7 +24,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     progressTasks = [NSMutableArray new];
-    defaults = [NSUserDefaults standardUserDefaults];
     object = [TasksData new];
     [self fillArray];
     mark = @" ";
