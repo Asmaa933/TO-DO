@@ -16,7 +16,6 @@
     NSMutableArray* allTasks;
     NSMutableArray* doneTasks;
     LocalStore* local;
-    int count;
 }
 @property (weak, nonatomic) IBOutlet UITableView *doneTable;
 
@@ -25,20 +24,17 @@
 @implementation DoneVC
 
 - (void)viewDidLoad {
-    count = 0;
     [super viewDidLoad];
-    local = [LocalStore new];
-    doneTasks = [NSMutableArray new];
 
 }
 - (void)viewWillAppear:(BOOL)animated
 {
     allTasks = [NSMutableArray arrayWithArray:[local getFromDefault]];
+    doneTasks = [NSMutableArray new];
     for (int i=0; i< [allTasks count]; i++)
     {
         if ([[allTasks objectAtIndex:i] prog] == 2) {
             [doneTasks addObject:[allTasks objectAtIndex:i]];
-            count ++;
            }
     }
    

@@ -14,8 +14,8 @@
 {
     NSArray* savedArr;
     NSMutableArray* defArray;
-     NSUserDefaults* def;
-
+    NSUserDefaults* def;
+    
 }
 
 - (instancetype)init
@@ -33,18 +33,14 @@
     
     savedArr = [[NSArray alloc] initWithArray:arr];
     NSData* data = [NSKeyedArchiver archivedDataWithRootObject:savedArr];
-                    //archivedDataWithRootObject:savedArr requiringSecureCoding:NO error:nil];
     [def setObject:data forKey:@"MyData"];
     [def synchronize];
-
+    
 }
 -(NSArray*) getFromDefault
 {
     NSData *data = [def objectForKey:@"MyData"];
-    NSMutableArray *retrievedArray = [[NSKeyedUnarchiver unarchiveObjectWithData:data]mutableCopy];
-                                       //unarchivedObjectOfClass:[NSMutableArray class] fromData:data error:nil] mutableCopy];
-                                      
-   
+    NSMutableArray *retrievedArray = [[NSKeyedUnarchiver unarchiveObjectWithData:data] mutableCopy];
     return retrievedArray;
 }
 

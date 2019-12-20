@@ -42,11 +42,9 @@
             break;
         case 1:
             _priorityLabel.text = @"Medium";
-            
             break;
         case 2:
             _priorityLabel.text = @"High";
-            
             break;
         default:
             break;

@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "AddOrEditDelegate.h"
 
-@interface TasksVC : UIViewController <UITableViewDelegate,UITableViewDataSource,AddOrEditDelegate,UISearchBarDelegate>
+@interface TasksVC : UIViewController <UITableViewDelegate,UITableViewDataSource,AddOrEditDelegate,UISearchBarDelegate,UITabBarControllerDelegate>
 
 
 @end

@@ -24,7 +24,6 @@
     BOOL isFiltered;
     NSMutableArray* filteredArr;
 
-    LocalStore* local;
 }
 @property (weak, nonatomic) IBOutlet UITableView *tasksTable;
 @property (weak, nonatomic) IBOutlet UISearchBar *taskSearch;
@@ -43,10 +42,7 @@
 
        isFiltered = NO;
 }
-- (void)viewWillDisappear:(BOOL)animated
-{
-  //  [local saveToDefault:[manager getAllTasks]];
-}
+
 - (IBAction)addBtnTapped:(UIBarButtonItem *)sender
 {
     addOrEdit.isEdit = NO;
@@ -106,7 +102,7 @@
     {
         arr =[manager getAllTasks];
     }
-    cell.taskNameLbl.text = [[arr objectAtIndex:indexPath.row] taskName ];
+    cell.taskNameLbl.text = [[arr objectAtIndex:indexPath.row] taskName];
     switch ([[arr objectAtIndex:indexPath.row] priorty]) {
         case 0:
             cell.priorityLbl.text = @"🟢";
@@ -131,8 +127,6 @@
         case 2:
             cell.progressLbl.text = @"✔️";
             break;
-            
-            
         default:
             cell.priorityLbl.text = @"";
             break;
@@ -171,7 +165,7 @@
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
 {
     filteredArr = [NSMutableArray new];
-    if(searchText.length==0)
+    if(searchText.length == 0)
     {
         TasksData* t1 = [TasksData new];
         t1.priorty = 4;
@@ -215,6 +209,9 @@
 {
     [self.view endEditing:YES];
 }
-
+- (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController
+{
+    [viewController viewWillAppear:YES];
+}
 @end
     

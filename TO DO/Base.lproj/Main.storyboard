@@ -486,6 +486,9 @@
                         <viewLayoutGuide key="safeArea" id="f9B-L7-ZbN"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Done" image="stop" catalog="system" selectedImage="stop" id="M2o-BM-uuM"/>
+                    <connections>
+                        <outlet property="doneTable" destination="bOv-cK-yZL" id="Y7N-BH-Tkx"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mJs-ay-QoZ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
