@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface PriorityVC : UIViewController<UITableViewDelegate,UITableViewDataSource>
+@interface PriorityVC : UIViewController <UITableViewDelegate,UITableViewDataSource,UITabBarControllerDelegate>
 
 @end
 

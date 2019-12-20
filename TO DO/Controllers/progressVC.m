@@ -82,4 +82,10 @@
     
 }
 
+- (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController
+{
+    [viewController viewWillAppear:YES];
+}
+
+
 @end

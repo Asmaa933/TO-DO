@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface progressVC : UIViewController<UITableViewDelegate,UITableViewDataSource>
+@interface progressVC : UIViewController<UITableViewDelegate,UITableViewDataSource,UITabBarControllerDelegate>
 
 @end
 

@@ -13,23 +13,36 @@
 
 @interface DoneVC ()
 {
+    NSMutableArray* allTasks;
     NSMutableArray* doneTasks;
     LocalStore* local;
+    int count;
 }
+@property (weak, nonatomic) IBOutlet UITableView *doneTable;
 
 @end
 
 @implementation DoneVC
 
 - (void)viewDidLoad {
+    count = 0;
     [super viewDidLoad];
     local = [LocalStore new];
-    doneTasks =[NSMutableArray arrayWithArray:[local getFromDefault]];
+    doneTasks = [NSMutableArray new];
 
 }
 - (void)viewWillAppear:(BOOL)animated
 {
-    doneTasks = [local getFromDefault];
+    allTasks = [NSMutableArray arrayWithArray:[local getFromDefault]];
+    for (int i=0; i< [allTasks count]; i++)
+    {
+        if ([[allTasks objectAtIndex:i] prog] == 2) {
+            [doneTasks addObject:[allTasks objectAtIndex:i]];
+            count ++;
+           }
+    }
+   
+    [_doneTable reloadData];
 
 }
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -42,8 +55,9 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     DoneCell *cell = [tableView dequeueReusableCellWithIdentifier:@"doneCell" forIndexPath:indexPath];
+    
     cell.taskNameLbl.text = [[doneTasks objectAtIndex:indexPath.row] taskName ];
-       switch ([[doneTasks objectAtIndex:indexPath.row] priorty]) {
+      switch ([[doneTasks objectAtIndex:indexPath.row] priorty]) {
            case 0:
                cell.priorityLbl.text = @"🟢";
                break;
@@ -59,6 +73,9 @@
        }
     return cell;
 }
-
+- (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController
+{
+    [viewController viewWillAppear:YES];
+}
 
 @end
