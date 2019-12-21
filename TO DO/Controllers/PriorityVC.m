@@ -36,13 +36,12 @@
     
     allTasks = [NSMutableArray arrayWithArray:[local getFromDefault]];
     arr = [NSMutableArray arrayWithArray:allTasks];
-
     lowTasks = [NSMutableArray new];
     medTasks = [NSMutableArray new];
     highTasks = [NSMutableArray new];
     for (int i=0; i< [allTasks count]; i++)
     {
-        switch ([[allTasks objectAtIndex:i] prog]) {
+        switch ([[allTasks objectAtIndex:i] priorty]) {
             case 0:
                 [lowTasks addObject:[allTasks objectAtIndex:i]];
                 break;
@@ -57,6 +56,7 @@
             default:
                 break;
         }
+        _prioritySegment.selectedSegmentIndex = 0;
         
     }
     [_priorityTable reloadData];

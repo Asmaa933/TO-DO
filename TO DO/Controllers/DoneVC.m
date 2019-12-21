@@ -18,6 +18,7 @@
     LocalStore* local;
 }
 @property (weak, nonatomic) IBOutlet UITableView *doneTable;
+@property (weak, nonatomic) IBOutlet UILabel *doneLabel;
 
 @end
 
@@ -46,6 +47,13 @@
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+    if (![doneTasks count]) {
+              _doneLabel.text = @"No completed tasks";
+              
+          }
+       else{
+              _doneLabel.text = @"";
+       }
     return [doneTasks count];
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath

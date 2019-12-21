@@ -44,6 +44,10 @@ bool isGrantedNotificationAccess;
        isFiltered = NO;
     [self notificationAuth];
 }
+- (void)viewWillAppear:(BOOL)animated
+{
+    [_tasksTable reloadData];
+}
 -(void) notificationAuth
 {
     isGrantedNotificationAccess = false;
@@ -167,12 +171,18 @@ bool isGrantedNotificationAccess;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    if ( [[[manager getAllTasks] objectAtIndex:indexPath.row] prog] == 2)
+    {
+        [self showAlert];
+    }
+    else
+    {
     addOrEdit.isEdit = YES;
     addOrEdit.editTask = [[manager getAllTasks] objectAtIndex:indexPath.row];
     addOrEdit.indexNum = (int) indexPath.row;
     [self.navigationController pushViewController:addOrEdit animated:YES];
 }
-
+}
 -(void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath
 {
     detail.detailTask = [[manager getAllTasks] objectAtIndex:indexPath.row];
@@ -235,5 +245,15 @@ bool isGrantedNotificationAccess;
 {
     [viewController viewWillAppear:YES];
 }
+-(void)showAlert
+{
+     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Alert" message:@"Can't edit done task" preferredStyle:UIAlertControllerStyleAlert];
+        
+    UIAlertAction *action1 = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil];
+
+        [alert addAction:action1];
+
+        [self presentViewController:alert animated:YES completion:nil];
+    }
 @end
     
