@@ -15,6 +15,8 @@
 #import "NSDate+DateExt.h"
 #import "DetailsVC.h"
 #import "LocalStore.h"
+#import <UserNotifications/UserNotifications.h>
+
 
 @interface TasksVC ()
 {
@@ -29,7 +31,7 @@
 @property (weak, nonatomic) IBOutlet UISearchBar *taskSearch;
 
 @end
-
+bool isGrantedNotificationAccess;
 @implementation TasksVC
 - (void)viewDidLoad
 {
@@ -40,11 +42,21 @@
     addOrEdit.delegate = self;
 
        isFiltered = NO;
+    [self notificationAuth];
 }
-
+-(void) notificationAuth
+{
+    isGrantedNotificationAccess = false;
+    UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
+    UNAuthorizationOptions options = UNAuthorizationOptionSound+UNAuthorizationOptionAlert;
+    [center requestAuthorizationWithOptions:options completionHandler:^(BOOL granted, NSError * _Nullable error) {
+        isGrantedNotificationAccess = granted;
+    }];
+}
 - (IBAction)addBtnTapped:(UIBarButtonItem *)sender
 {
     addOrEdit.isEdit = NO;
+    addOrEdit.isGranted = isGrantedNotificationAccess;
     [self.navigationController pushViewController:addOrEdit animated:YES];
     
 }

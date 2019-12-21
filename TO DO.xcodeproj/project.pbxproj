@@ -14,6 +14,7 @@
 		764E0D7D23A55375007A193C /* LocalStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 764E0D7C23A55375007A193C /* LocalStore.m */; };
 		7651980123A4E78D0064A867 /* progressVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7651980023A4E78D0064A867 /* progressVC.m */; };
 		7651980523A4FE910064A867 /* progressCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7651980423A4FE910064A867 /* progressCell.m */; };
+		76D7B3C023AE203C0037746B /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 76D7B3BF23AE203C0037746B /* UserNotifications.framework */; };
 		76D83AF623A4108200455158 /* TasksCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 76D83AF523A4108200455158 /* TasksCell.m */; };
 		76D83AFA23A4396C00455158 /* NSString+NSStringExt.m in Sources */ = {isa = PBXBuildFile; fileRef = 76D83AF923A4396C00455158 /* NSString+NSStringExt.m */; };
 		76D83AFD23A4456B00455158 /* DetailsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 76D83AFC23A4456B00455158 /* DetailsVC.m */; };
@@ -45,6 +46,7 @@
 		7651980023A4E78D0064A867 /* progressVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = progressVC.m; sourceTree = "<group>"; };
 		7651980323A4FE910064A867 /* progressCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = progressCell.h; sourceTree = "<group>"; };
 		7651980423A4FE910064A867 /* progressCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = progressCell.m; sourceTree = "<group>"; };
+		76D7B3BF23AE203C0037746B /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
 		76D83AF423A4108200455158 /* TasksCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TasksCell.h; sourceTree = "<group>"; };
 		76D83AF523A4108200455158 /* TasksCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TasksCell.m; sourceTree = "<group>"; };
 		76D83AF823A4396C00455158 /* NSString+NSStringExt.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSString+NSStringExt.h"; sourceTree = "<group>"; };
@@ -79,6 +81,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				76D7B3C023AE203C0037746B /* UserNotifications.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -100,6 +103,14 @@
 			path = Cells;
 			sourceTree = "<group>";
 		};
+		76D7B3BE23AE203C0037746B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				76D7B3BF23AE203C0037746B /* UserNotifications.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		76D83AF723A4393E00455158 /* Categories */ = {
 			isa = PBXGroup;
 			children = (
@@ -116,6 +127,7 @@
 			children = (
 				76D8975823A3C05500CD15DE /* TO DO */,
 				76D8975723A3C05500CD15DE /* Products */,
+				76D7B3BE23AE203C0037746B /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};

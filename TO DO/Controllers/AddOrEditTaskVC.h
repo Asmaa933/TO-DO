@@ -14,6 +14,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface AddOrEditTaskVC : UIViewController 
 @property BOOL isEdit;
+
+@property bool isGranted;
+
 @property id <AddOrEditDelegate> delegate;
 @property TasksData* editTask;
 @property int indexNum;

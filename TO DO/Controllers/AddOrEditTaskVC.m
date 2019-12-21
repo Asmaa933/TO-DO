@@ -11,11 +11,13 @@
 #import "AddOrEditDelegate.h"
 #import "NSDate+DateExt.h"
 #import "NSString+NSStringExt.h"
-
+#import <UserNotifications/UserNotifications.h>
 
 @interface AddOrEditTaskVC ()
 {
     TasksData* addTask;
+    
+    
 }
 @property (weak, nonatomic) IBOutlet UITextField *nameTxt;
 @property (weak, nonatomic) IBOutlet UITextField *descTxt;
@@ -76,7 +78,10 @@
     addTask.prog = (int) _progressSegment.selectedSegmentIndex;
     addTask.reminderDate = [_reminderDatePicker.date changeToString];
     [_delegate saveTask:addTask : _indexNum];
+    [self showNotification];
     [self resetData];
+
+
     
     [self.navigationController popViewControllerAnimated:YES];
 }
@@ -110,5 +115,28 @@
     
 }
 
+-(void) showNotification
+{
+    if (_isGranted) {
+        UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
+        UNMutableNotificationContent *content = [[UNMutableNotificationContent alloc]init];
+        NSDateComponents *triggerDate = [[NSCalendar currentCalendar]
+        components:NSCalendarUnitYear +
+        NSCalendarUnitMonth + NSCalendarUnitDay +
+        NSCalendarUnitHour + NSCalendarUnitMinute +
+        NSCalendarUnitSecond fromDate:[_reminderDatePicker date]];
+        
+        content.title = @"Reminder for task";
+        content.subtitle = _nameTxt.text;
+        content.body = _descTxt.text;
+
+        content.sound = [UNNotificationSound defaultSound];
+        UNCalendarNotificationTrigger *trigger = [UNCalendarNotificationTrigger triggerWithDateMatchingComponents:triggerDate repeats:NO];
+        UNNotificationRequest *request = [UNNotificationRequest requestWithIdentifier:_nameTxt.text content:content trigger:trigger];
+        [center addNotificationRequest:request withCompletionHandler:nil];
+        
+    }
+    
+}
 
 @end
