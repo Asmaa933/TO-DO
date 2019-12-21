@@ -13,16 +13,16 @@
 
 @implementation ManageTasks
 {
-NSMutableArray* taskArr;
-   LocalStore* local;
-  
+    NSMutableArray* taskArr;
+    LocalStore* local;
+    
 }
 
 - (instancetype)init
 {
     self = [super init];
     if (self) {
-            local = [LocalStore new];
+        local = [LocalStore new];
         if ([local getFromDefault])
         {
             taskArr = [NSMutableArray arrayWithArray:[local getFromDefault]];
@@ -36,9 +36,9 @@ NSMutableArray* taskArr;
             t1.taskDate = [[NSDate date]changeToString];
             t1.taskName = @"";
             t1.taskDesc = @"";
-        taskArr =  [[NSMutableArray alloc] initWithObjects:t1, nil];
+            taskArr =  [[NSMutableArray alloc] initWithObjects:t1, nil];
         }
-      
+        
     }
     return self;
 }
@@ -46,9 +46,9 @@ NSMutableArray* taskArr;
 {
     [taskArr addObject:task];
     if ([[[taskArr objectAtIndex:0] taskName ]  isEqual: @""])
-      {
-          [self deleteTask:0];
-      }
+    {
+        [self deleteTask:0];
+    }
     [local saveToDefault:taskArr];
 }
 -(void) deleteTask : (int) index
@@ -56,18 +56,18 @@ NSMutableArray* taskArr;
     [taskArr removeObjectAtIndex:index];
     if (![taskArr count]) {
         TasksData* t1 = [TasksData new];
-            t1.priorty = 4;
-            t1.prog = 4;
-            t1.reminderDate = [[NSDate date]changeToString];
-            t1.taskDate = [[NSDate date]changeToString];
-            t1.taskName = @"";
-            t1.taskDesc = @"";
+        t1.priorty = 4;
+        t1.prog = 4;
+        t1.reminderDate = [[NSDate date]changeToString];
+        t1.taskDate = [[NSDate date]changeToString];
+        t1.taskName = @"";
+        t1.taskDesc = @"";
         taskArr =  [[NSMutableArray alloc] initWithObjects:t1, nil];
     }
     [local saveToDefault:taskArr];
-
-
-
+    
+    
+    
 }
 -(NSMutableArray*) getAllTasks
 {
@@ -77,7 +77,7 @@ NSMutableArray* taskArr;
 {
     [taskArr replaceObjectAtIndex:index withObject:task];
     [local saveToDefault:taskArr];
-
+    
 }
 
 

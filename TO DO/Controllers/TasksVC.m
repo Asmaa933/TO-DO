@@ -25,13 +25,13 @@
     DetailsVC* detail;
     BOOL isFiltered;
     NSMutableArray* filteredArr;
-
+    
 }
 @property (weak, nonatomic) IBOutlet UITableView *tasksTable;
 @property (weak, nonatomic) IBOutlet UISearchBar *taskSearch;
 
 @end
-bool isGrantedNotificationAccess;
+BOOL isGrantedNotificationAccess;
 @implementation TasksVC
 - (void)viewDidLoad
 {
@@ -40,8 +40,8 @@ bool isGrantedNotificationAccess;
     addOrEdit = [self.storyboard instantiateViewControllerWithIdentifier:@"addOrEdit"];
     detail = [self.storyboard instantiateViewControllerWithIdentifier:@"detail"];
     addOrEdit.delegate = self;
-
-       isFiltered = NO;
+    
+    isFiltered = NO;
     [self notificationAuth];
 }
 - (void)viewWillAppear:(BOOL)animated
@@ -50,7 +50,7 @@ bool isGrantedNotificationAccess;
 }
 -(void) notificationAuth
 {
-    isGrantedNotificationAccess = false;
+    isGrantedNotificationAccess = NO;
     UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
     UNAuthorizationOptions options = UNAuthorizationOptionSound+UNAuthorizationOptionAlert;
     [center requestAuthorizationWithOptions:options completionHandler:^(BOOL granted, NSError * _Nullable error) {
@@ -72,7 +72,7 @@ bool isGrantedNotificationAccess;
     }
     else
     {
-     [manager editTask:task :index];
+        [manager editTask:task :index];
     }
     [_tasksTable reloadData];
     
@@ -86,11 +86,11 @@ bool isGrantedNotificationAccess;
     NSInteger numRows = 0 ;
     if(isFiltered)
     {
-    numRows =  [filteredArr count];
+        numRows =  [filteredArr count];
     }
     else
     {
-    numRows = [[manager getAllTasks]count];
+        numRows = [[manager getAllTasks]count];
     }
     return numRows;
 }
@@ -99,24 +99,24 @@ bool isGrantedNotificationAccess;
 {
     NSMutableArray* arr = [NSMutableArray new];
     TasksCell *cell = [tableView dequeueReusableCellWithIdentifier:@"taskCell" forIndexPath:indexPath];
-   if ([[[[manager getAllTasks] objectAtIndex:0] taskName] isEqual: @""])
-      {
-          cell.accessoryType = UITableViewScrollPositionNone;
-          cell.priorityLbl.text = @"" ;
-          cell.progressLbl.text = @"" ;
-          cell.taskNameLbl.text = @"" ;
-
-      }
-      else
-      {
-          cell.accessoryType = UITableViewCellAccessoryDetailDisclosureButton;
-          
-      }
+    if ([[[[manager getAllTasks] objectAtIndex:0] taskName] isEqual: @""])
+    {
+        cell.accessoryType = UITableViewScrollPositionNone;
+        cell.priorityLbl.text = @"" ;
+        cell.progressLbl.text = @"" ;
+        cell.taskNameLbl.text = @"" ;
+        
+    }
+    else
+    {
+        cell.accessoryType = UITableViewCellAccessoryDetailDisclosureButton;
+        
+    }
     if(isFiltered)
-   {
-       arr = filteredArr;
-       
-   }
+    {
+        arr = filteredArr;
+        
+    }
     else
     {
         arr =[manager getAllTasks];
@@ -160,7 +160,7 @@ bool isGrantedNotificationAccess;
         [manager deleteTask:(int) indexPath.row];
         [_tasksTable reloadData];
     }
-    }
+}
 - (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if ([[[[manager getAllTasks] objectAtIndex:0] taskName] isEqual: @""])
@@ -177,11 +177,11 @@ bool isGrantedNotificationAccess;
     }
     else
     {
-    addOrEdit.isEdit = YES;
-    addOrEdit.editTask = [[manager getAllTasks] objectAtIndex:indexPath.row];
-    addOrEdit.indexNum = (int) indexPath.row;
-    [self.navigationController pushViewController:addOrEdit animated:YES];
-}
+        addOrEdit.isEdit = YES;
+        addOrEdit.editTask = [[manager getAllTasks] objectAtIndex:indexPath.row];
+        addOrEdit.indexNum = (int) indexPath.row;
+        [self.navigationController pushViewController:addOrEdit animated:YES];
+    }
 }
 -(void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath
 {
@@ -217,14 +217,14 @@ bool isGrantedNotificationAccess;
             NSRange stringRange = [[[[manager getAllTasks] objectAtIndex:i]taskName] rangeOfString:searchText options:NSCaseInsensitiveSearch];
             if(stringRange.location != NSNotFound)
             {
-            [filteredArr addObject:[[manager getAllTasks] objectAtIndex:i]];
+                [filteredArr addObject:[[manager getAllTasks] objectAtIndex:i]];
             }
         }
-
-
-}
+        
+        
+    }
     [_tasksTable reloadData];
-
+    
 }
 -(void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
 {
@@ -235,7 +235,7 @@ bool isGrantedNotificationAccess;
 {
     isFiltered=NO;
     [_tasksTable reloadData];
-
+    
 }
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {
@@ -247,13 +247,13 @@ bool isGrantedNotificationAccess;
 }
 -(void)showAlert
 {
-     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Alert" message:@"Can't edit done task" preferredStyle:UIAlertControllerStyleAlert];
-        
-    UIAlertAction *action1 = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil];
-
-        [alert addAction:action1];
-
-        [self presentViewController:alert animated:YES completion:nil];
-    }
-@end
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Alert" message:@"Can't edit done task" preferredStyle:UIAlertControllerStyleAlert];
     
+    UIAlertAction *action1 = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil];
+    
+    [alert addAction:action1];
+    
+    [self presentViewController:alert animated:YES completion:nil];
+}
+@end
+

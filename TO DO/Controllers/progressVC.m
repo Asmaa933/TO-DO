@@ -15,7 +15,7 @@
 
 @interface progressVC ()
 {
-   NSMutableArray* allTasks;
+    NSMutableArray* allTasks;
     NSMutableArray* progressTasks;
     LocalStore* local;
     ManageTasks* manage;
@@ -37,16 +37,16 @@
     progressTasks = [NSMutableArray new];
     
     for (int i=0; i< [allTasks count]; i++)
-        {
-            if ([[allTasks objectAtIndex:i] prog] == 1) {
-                [progressTasks addObject:[allTasks objectAtIndex:i]];
-               }
+    {
+        if ([[allTasks objectAtIndex:i] prog] == 1) {
+            [progressTasks addObject:[allTasks objectAtIndex:i]];
         }
-   
-       
-        [_progressTable reloadData];
-
     }
+    
+    
+    [_progressTable reloadData];
+    
+}
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
@@ -54,11 +54,11 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     if (![progressTasks count]) {
-           _taskVCLabel.text = @"No in progress tasks";
-           
-       }
+        _taskVCLabel.text = @"No in progress tasks";
+        
+    }
     else{
-           _taskVCLabel.text = @"Press on task to mark as complete";
+        _taskVCLabel.text = @"Press on task to mark as complete";
     }
     return [progressTasks count];
 }
@@ -68,27 +68,27 @@
     cell.taskNameLbl.text = [[progressTasks objectAtIndex:indexPath.row] taskName];
     switch ([[progressTasks objectAtIndex:indexPath.row] priorty])
     {
-          case 0:
-              cell.priorityLbl.text = @"🟢";
-              break;
-          case 1:
-              cell.priorityLbl.text = @"🟡";
-              break;
-          case 2:
-              cell.priorityLbl.text = @"🔴";
-              break;
-          default:
-              cell.priorityLbl.text = @"";
-              break;
+        case 0:
+            cell.priorityLbl.text = @"🟢";
+            break;
+        case 1:
+            cell.priorityLbl.text = @"🟡";
+            break;
+        case 2:
+            cell.priorityLbl.text = @"🔴";
+            break;
+        default:
+            cell.priorityLbl.text = @"";
+            break;
             
-      }
+    }
     return cell;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     manage = [ManageTasks new];
     int index = 0;
-  TasksData* selectedTask = [progressTasks objectAtIndex:indexPath.row];
+    TasksData* selectedTask = [progressTasks objectAtIndex:indexPath.row];
     for (int i = 0 ; i < [allTasks count];i++)
     {
         if ([selectedTask taskName] == [[allTasks objectAtIndex:i] taskName])

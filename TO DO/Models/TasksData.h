@@ -11,13 +11,13 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface TasksData : NSObject <NSCoding>
-  @property NSString* taskName;
-  @property NSString* taskDesc;
-  @property NSString* taskDate;
-  @property NSString* reminderDate;
-  @property int priorty;
-  @property int prog;
-    
+@property NSString* taskName;
+@property NSString* taskDesc;
+@property NSString* taskDate;
+@property NSString* reminderDate;
+@property int priorty;
+@property int prog;
+
 
 
 @end

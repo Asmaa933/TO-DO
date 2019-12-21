@@ -31,7 +31,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+    
     
 }
 -(void) viewWillAppear:(BOOL)animated
@@ -40,7 +40,7 @@
     [_nameTxt becomeFirstResponder];
     if(_isEdit)
     {
-
+        
         self.navigationItem.title = @"Edit Task";
         _nameTxt.text = _editTask.taskName;
         _descTxt.text = _editTask.taskDesc;
@@ -80,29 +80,29 @@
     [_delegate saveTask:addTask : _indexNum];
     [self showNotification];
     [self resetData];
-
-
+    
+    
     
     [self.navigationController popViewControllerAnimated:YES];
 }
 -(void)showAlert
 {
-     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Alert" message:@"Are  you sure you want to save?" preferredStyle:UIAlertControllerStyleAlert];
-        
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Alert" message:@"Are  you sure you want to save?" preferredStyle:UIAlertControllerStyleAlert];
+    
     UIAlertAction *action1 = [UIAlertAction actionWithTitle:@"Save" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action)
-    {
+                              {
         
         [self saveTask];
     }];
     UIAlertAction *action2 = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleDefault handler:nil];
     
-        
-        [alert addAction:action1];
-        [alert addAction:action2];
     
-
-        [self presentViewController:alert animated:YES completion:nil];
-    }
+    [alert addAction:action1];
+    [alert addAction:action2];
+    
+    
+    [self presentViewController:alert animated:YES completion:nil];
+}
 
 -(void)resetData
 {
@@ -121,15 +121,15 @@
         UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
         UNMutableNotificationContent *content = [[UNMutableNotificationContent alloc]init];
         NSDateComponents *triggerDate = [[NSCalendar currentCalendar]
-        components:NSCalendarUnitYear +
-        NSCalendarUnitMonth + NSCalendarUnitDay +
-        NSCalendarUnitHour + NSCalendarUnitMinute +
-        NSCalendarUnitSecond fromDate:[_reminderDatePicker date]];
+                                         components:NSCalendarUnitYear +
+                                         NSCalendarUnitMonth + NSCalendarUnitDay +
+                                         NSCalendarUnitHour + NSCalendarUnitMinute +
+                                         NSCalendarUnitSecond fromDate:[_reminderDatePicker date]];
         
         content.title = @"Reminder for task";
         content.subtitle = _nameTxt.text;
         content.body = _descTxt.text;
-
+        
         content.sound = [UNNotificationSound defaultSound];
         UNCalendarNotificationTrigger *trigger = [UNCalendarNotificationTrigger triggerWithDateMatchingComponents:triggerDate repeats:NO];
         UNNotificationRequest *request = [UNNotificationRequest requestWithIdentifier:_nameTxt.text content:content trigger:trigger];

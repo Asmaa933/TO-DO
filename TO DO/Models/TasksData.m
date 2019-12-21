@@ -18,7 +18,7 @@
         self.reminderDate = [decoder decodeObjectForKey:@"reminderDate"];
         self.priorty = [decoder decodeIntForKey:@"priorty"];
         self.prog = [decoder decodeIntForKey:@"prog"];
-
+        
     }
     return self;
 }
@@ -30,6 +30,6 @@
     [encoder encodeInt: self.priorty forKey:@"priorty"];
     [encoder encodeInt: self.prog forKey:@"prog"];
 }
-          
-    
+
+
 @end

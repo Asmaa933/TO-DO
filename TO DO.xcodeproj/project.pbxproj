@@ -103,6 +103,17 @@
 			path = Cells;
 			sourceTree = "<group>";
 		};
+		76D58F7E23AE6BA400B57B1B /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				76D8977623A3E24E00CD15DE /* TasksData.h */,
+				76D8977723A3E24E00CD15DE /* TasksData.m */,
+				76D8977923A3E7E400CD15DE /* ManageTasks.h */,
+				76D8977A23A3E7E400CD15DE /* ManageTasks.m */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		76D7B3BE23AE203C0037746B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -146,21 +157,18 @@
 				76D8975A23A3C05500CD15DE /* AppDelegate.m */,
 				76D8975C23A3C05500CD15DE /* SceneDelegate.h */,
 				76D8975D23A3C05500CD15DE /* SceneDelegate.m */,
+				764E0D7B23A55375007A193C /* LocalStore.h */,
+				764E0D7C23A55375007A193C /* LocalStore.m */,
+				76D58F7E23AE6BA400B57B1B /* Models */,
 				76D8978B23A40D9C00CD15DE /* Controllers */,
+				76D8978723A409EC00CD15DE /* Protocols */,
+				76D83AF723A4393E00455158 /* Categories */,
+				7651980223A4FE270064A867 /* Cells */,
 				76D8976223A3C05500CD15DE /* Main.storyboard */,
 				76D8976523A3C05B00CD15DE /* Assets.xcassets */,
 				76D8976723A3C05B00CD15DE /* LaunchScreen.storyboard */,
 				76D8976A23A3C05B00CD15DE /* Info.plist */,
 				76D8976B23A3C05B00CD15DE /* main.m */,
-				76D8977623A3E24E00CD15DE /* TasksData.h */,
-				76D8977723A3E24E00CD15DE /* TasksData.m */,
-				76D8977923A3E7E400CD15DE /* ManageTasks.h */,
-				76D8977A23A3E7E400CD15DE /* ManageTasks.m */,
-				76D8978723A409EC00CD15DE /* Protocols */,
-				76D83AF723A4393E00455158 /* Categories */,
-				7651980223A4FE270064A867 /* Cells */,
-				764E0D7B23A55375007A193C /* LocalStore.h */,
-				764E0D7C23A55375007A193C /* LocalStore.m */,
 			);
 			path = "TO DO";
 			sourceTree = "<group>";

@@ -27,7 +27,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [self updateUI];
-
+    
 }
 -(void) updateUI
 {
