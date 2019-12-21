@@ -34,7 +34,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-   
     manager = [ManageTasks new];
     addOrEdit = [self.storyboard instantiateViewControllerWithIdentifier:@"addOrEdit"];
     detail = [self.storyboard instantiateViewControllerWithIdentifier:@"detail"];
@@ -84,9 +83,13 @@
 {
     NSMutableArray* arr = [NSMutableArray new];
     TasksCell *cell = [tableView dequeueReusableCellWithIdentifier:@"taskCell" forIndexPath:indexPath];
-   if ([[[[manager getAllTasks] objectAtIndex:0] taskName] isEqual:@""])
+   if ([[[[manager getAllTasks] objectAtIndex:0] taskName] isEqual: @""])
       {
           cell.accessoryType = UITableViewScrollPositionNone;
+          cell.priorityLbl.text = @"" ;
+          cell.progressLbl.text = @"" ;
+          cell.taskNameLbl.text = @"" ;
+
       }
       else
       {
@@ -141,7 +144,14 @@
         [manager deleteTask:(int) indexPath.row];
         [_tasksTable reloadData];
     }
-    
+    }
+- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if ([[[[manager getAllTasks] objectAtIndex:0] taskName] isEqual: @""])
+    {
+        return UITableViewCellEditingStyleNone;
+    }
+    return UITableViewCellEditingStyleDelete;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {

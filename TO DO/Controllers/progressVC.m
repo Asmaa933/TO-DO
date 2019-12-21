@@ -9,39 +9,50 @@
 #import "progressVC.h"
 #import "progressCell.h"
 #import "TasksData.h"
+#import "LocalStore.h"
+#import "TasksData.h"
+
 
 @interface progressVC ()
+{
+   NSMutableArray* allTasks;
+    NSMutableArray* progressTasks;
+    LocalStore* local;
+}
+@property (weak, nonatomic) IBOutlet UITableView *progressTable;
+@property (weak, nonatomic) IBOutlet UILabel *taskVCLabel;
 
 @end
 
 @implementation progressVC
-{
-    NSMutableArray* progressTasks;
-    TasksData* object;
-    NSString* mark;
-}
-
 - (void)viewDidLoad {
     [super viewDidLoad];
-    progressTasks = [NSMutableArray new];
-    object = [TasksData new];
-    [self fillArray];
-    mark = @" ";
-     
-}
--(void) fillArray
-{
-    NSMutableArray *data = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:@"Key"]];
-    for (int i=0; i<[data count]; i++)
-    {
-        object = [data objectAtIndex:i];
-        if ([object prog] == 1)
-        {
-            [progressTasks addObject:[data objectAtIndex:i]];
-        }
-    }
+    local = [LocalStore new];
 
 }
+- (void)viewWillAppear:(BOOL)animated
+
+{
+    allTasks = [NSMutableArray arrayWithArray:[local getFromDefault]];
+    progressTasks = [NSMutableArray new];
+    
+    for (int i=0; i< [allTasks count]; i++)
+        {
+            if ([[allTasks objectAtIndex:i] prog] == 1) {
+                [progressTasks addObject:[allTasks objectAtIndex:i]];
+               }
+        }
+    if (![progressTasks count]) {
+        _taskVCLabel.text = @"NO In progress tasks";
+        
+    }
+    else
+        _taskVCLabel.text = @"Press on task to mark as complete";
+       
+        [_progressTable reloadData];
+
+    }
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
 }
@@ -69,17 +80,16 @@
               break;
             
       }
-    cell.markLbl.text = mark;
     return cell;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if ([mark  isEqual: @" "])
-    {
-        mark = @"✔️";
-    }
+
     
-    
+}
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+    return @"In progress Tasks";
 }
 
 - (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController

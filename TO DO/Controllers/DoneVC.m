@@ -25,7 +25,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+    local = [LocalStore new];
 }
 - (void)viewWillAppear:(BOOL)animated
 {
@@ -68,6 +68,10 @@
                break;
        }
     return cell;
+}
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+    return @"Completed Tasks";
 }
 - (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController
 {

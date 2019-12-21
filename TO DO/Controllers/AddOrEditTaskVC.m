@@ -50,6 +50,7 @@
     else
     {
         self.navigationItem.title = @"Add Task";
+        [self resetData];
         
     }
 }
@@ -76,6 +77,7 @@
     addTask.reminderDate = [_reminderDatePicker.date changeToString];
     [_delegate saveTask:addTask : _indexNum];
     [self resetData];
+    
     [self.navigationController popViewControllerAnimated:YES];
 }
 -(void)showAlert
