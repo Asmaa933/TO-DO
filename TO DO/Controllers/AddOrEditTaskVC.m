@@ -40,7 +40,7 @@
     [_nameTxt becomeFirstResponder];
     if(_isEdit)
     {
-        
+        [self deleteCertainNotification];
         self.navigationItem.title = @"Edit Task";
         _nameTxt.text = _editTask.taskName;
         _descTxt.text = _editTask.taskDesc;
@@ -129,6 +129,7 @@
         content.title = @"Reminder for task";
         content.subtitle = _nameTxt.text;
         content.body = _descTxt.text;
+        content.badge = [NSNumber numberWithInteger:([UIApplication sharedApplication].applicationIconBadgeNumber + 1)];
         
         content.sound = [UNNotificationSound defaultSound];
         UNCalendarNotificationTrigger *trigger = [UNCalendarNotificationTrigger triggerWithDateMatchingComponents:triggerDate repeats:NO];
@@ -137,6 +138,13 @@
         
     }
     
+}
+
+-(void) deleteCertainNotification
+{
+    NSArray *arr = [NSArray arrayWithObject:_editTask.taskName];
+    UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
+    [center removePendingNotificationRequestsWithIdentifiers:arr];
 }
 
 @end

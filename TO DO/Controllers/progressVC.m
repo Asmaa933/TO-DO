@@ -86,23 +86,8 @@
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    manage = [ManageTasks new];
-    int index = 0;
-    TasksData* selectedTask = [progressTasks objectAtIndex:indexPath.row];
-    for (int i = 0 ; i < [allTasks count];i++)
-    {
-        if ([selectedTask taskName] == [[allTasks objectAtIndex:i] taskName])
-        {
-            index = i;
-            break;
-        }
-        
-    }
-    [progressTasks removeObjectAtIndex:indexPath.row];
-    selectedTask.prog = 2;
-    
-    [manage editTask:selectedTask :index];
-    [_progressTable reloadData];
+    [self showChangeStatusAlert:(int) indexPath.row];
+
 }
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
@@ -114,5 +99,44 @@
     [viewController viewWillAppear:YES];
 }
 
+-(void) showChangeStatusAlert: (int) index
+{
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Alert" message:@"Are  you sure you want to mark task as completed?" preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction *action1 = [UIAlertAction actionWithTitle:@"Done" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action)
+    {
+        
+        [self changeStatus:index];
+
+    }];
+    UIAlertAction *action2 = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleDefault handler:nil];
+    
+    
+    [alert addAction:action1];
+    [alert addAction:action2];
+    
+    
+    [self presentViewController:alert animated:YES completion:nil];
+}
+
+-(void) changeStatus :(int) index
+{
+    manage = [ManageTasks new];
+    int selIndex = 0;
+    TasksData* selectedTask = [progressTasks objectAtIndex:index];
+    for (int i = 0 ; i < [allTasks count];i++)
+    {
+        if ([selectedTask taskName] == [[allTasks objectAtIndex:i] taskName])
+        {
+            selIndex = i;
+            break;
+        }
+    }
+    [progressTasks removeObjectAtIndex:index];
+    selectedTask.prog = 2;
+    
+    [manage editTask:selectedTask :selIndex];
+    [_progressTable reloadData];
+}
 
 @end

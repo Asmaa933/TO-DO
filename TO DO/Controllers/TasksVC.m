@@ -36,7 +36,6 @@ BOOL isGrantedNotificationAccess;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    manager = [ManageTasks new];
     addOrEdit = [self.storyboard instantiateViewControllerWithIdentifier:@"addOrEdit"];
     detail = [self.storyboard instantiateViewControllerWithIdentifier:@"detail"];
     addOrEdit.delegate = self;
@@ -46,6 +45,8 @@ BOOL isGrantedNotificationAccess;
 }
 - (void)viewWillAppear:(BOOL)animated
 {
+    manager = [ManageTasks new];
+
     [_tasksTable reloadData];
 }
 -(void) notificationAuth
@@ -157,8 +158,8 @@ BOOL isGrantedNotificationAccess;
 {
     if (editingStyle == UITableViewCellEditingStyleDelete)
     {
-        [manager deleteTask:(int) indexPath.row];
-        [_tasksTable reloadData];
+        [self showDeleteAlert:(int)indexPath.row];
+
     }
 }
 - (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -173,7 +174,7 @@ BOOL isGrantedNotificationAccess;
 {
     if ( [[[manager getAllTasks] objectAtIndex:indexPath.row] prog] == 2)
     {
-        [self showAlert];
+        [self showDoneAlert];
     }
     else
     {
@@ -245,7 +246,7 @@ BOOL isGrantedNotificationAccess;
 {
     [viewController viewWillAppear:YES];
 }
--(void)showAlert
+-(void) showDoneAlert
 {
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Alert" message:@"Can't edit done task" preferredStyle:UIAlertControllerStyleAlert];
     
@@ -255,5 +256,26 @@ BOOL isGrantedNotificationAccess;
     
     [self presentViewController:alert animated:YES completion:nil];
 }
+-(void) showDeleteAlert: (int) index
+{
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Alert" message:@"Are  you sure you want to Delete task?" preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction *action1 = [UIAlertAction actionWithTitle:@"Delete" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action)
+    {
+        
+        [self->manager deleteTask:(int) index];
+        [self->_tasksTable reloadData];
+
+    }];
+    UIAlertAction *action2 = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleDefault handler:nil];
+    
+    
+    [alert addAction:action1];
+    [alert addAction:action2];
+    
+    
+    [self presentViewController:alert animated:YES completion:nil];
+}
+
 @end
 
