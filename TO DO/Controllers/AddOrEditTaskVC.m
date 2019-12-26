@@ -45,6 +45,10 @@
         _nameTxt.text = _editTask.taskName;
         _descTxt.text = _editTask.taskDesc;
         _prioritySegment.selectedSegmentIndex = _editTask.priorty;
+        if(_editTask.prog == 1)
+        {
+            [_progressSegment setEnabled:NO forSegmentAtIndex:0];
+        }
         _progressSegment.selectedSegmentIndex =_editTask.prog;
         _reminderDatePicker.date = [_editTask.reminderDate convertToDate];
         
@@ -110,6 +114,7 @@
     _descTxt.text = @"";
     _prioritySegment.selectedSegmentIndex = 0;
     _progressSegment.selectedSegmentIndex = 0;
+    [_progressSegment setEnabled:YES forSegmentAtIndex:0];
     _reminderDatePicker.date = [NSDate date];
     _isEdit = NO;
     

@@ -100,19 +100,6 @@ BOOL isGrantedNotificationAccess;
 {
     NSMutableArray* arr = [NSMutableArray new];
     TasksCell *cell = [tableView dequeueReusableCellWithIdentifier:@"taskCell" forIndexPath:indexPath];
-    if ([[[[manager getAllTasks] objectAtIndex:0] taskName] isEqual: @""])
-    {
-        cell.accessoryType = UITableViewScrollPositionNone;
-        cell.priorityLbl.text = @"" ;
-        cell.progressLbl.text = @"" ;
-        cell.taskNameLbl.text = @"" ;
-        
-    }
-    else
-    {
-        cell.accessoryType = UITableViewCellAccessoryDetailDisclosureButton;
-        
-    }
     if(isFiltered)
     {
         arr = filteredArr;
@@ -151,6 +138,8 @@ BOOL isGrantedNotificationAccess;
             cell.priorityLbl.text = @"";
             break;
     }
+    cell.accessoryType = UITableViewCellAccessoryDetailDisclosureButton;
+
     return cell;
 }
 
@@ -159,17 +148,10 @@ BOOL isGrantedNotificationAccess;
     if (editingStyle == UITableViewCellEditingStyleDelete)
     {
         [self showDeleteAlert:(int)indexPath.row];
+        [self deleteCertainNotification:[[manager getAllTasks] objectAtIndex:indexPath.row]];
+    }
+}
 
-    }
-}
-- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if ([[[[manager getAllTasks] objectAtIndex:0] taskName] isEqual: @""])
-    {
-        return UITableViewCellEditingStyleNone;
-    }
-    return UITableViewCellEditingStyleDelete;
-}
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if ( [[[manager getAllTasks] objectAtIndex:indexPath.row] prog] == 2)
@@ -200,14 +182,6 @@ BOOL isGrantedNotificationAccess;
     filteredArr = [NSMutableArray new];
     if(searchText.length == 0)
     {
-        TasksData* t1 = [TasksData new];
-        t1.priorty = 4;
-        t1.prog = 4;
-        t1.reminderDate = [[NSDate date]changeToString];
-        t1.taskDate = [[NSDate date]changeToString];
-        t1.taskName = @"";
-        t1.taskDesc = @"";
-        [filteredArr  addObject: t1];
         isFiltered=NO;
     }
     
@@ -275,6 +249,12 @@ BOOL isGrantedNotificationAccess;
     
     
     [self presentViewController:alert animated:YES completion:nil];
+}
+-(void) deleteCertainNotification: (TasksData*) task
+{
+    NSArray *arr = [NSArray arrayWithObject:task.taskName];
+    UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
+    [center removePendingNotificationRequestsWithIdentifiers:arr];
 }
 
 @end

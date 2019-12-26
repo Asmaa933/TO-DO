@@ -15,7 +15,6 @@
 {
     NSMutableArray* taskArr;
     LocalStore* local;
-    
 }
 
 - (instancetype)init
@@ -29,14 +28,7 @@
         }
         else
         {
-            TasksData* t1 = [TasksData new];
-            t1.priorty = 4;
-            t1.prog = 4;
-            t1.reminderDate = [[NSDate date]changeToString];
-            t1.taskDate = [[NSDate date]changeToString];
-            t1.taskName = @"";
-            t1.taskDesc = @"";
-            taskArr =  [[NSMutableArray alloc] initWithObjects:t1, nil];
+            taskArr = [NSMutableArray new];
         }
         
     }
@@ -54,16 +46,7 @@
 -(void) deleteTask : (int) index
 {
     [taskArr removeObjectAtIndex:index];
-    if (![taskArr count]) {
-        TasksData* t1 = [TasksData new];
-        t1.priorty = 4;
-        t1.prog = 4;
-        t1.reminderDate = [[NSDate date]changeToString];
-        t1.taskDate = [[NSDate date]changeToString];
-        t1.taskName = @"";
-        t1.taskDesc = @"";
-        taskArr =  [[NSMutableArray alloc] initWithObjects:t1, nil];
-    }
+
     [local saveToDefault:taskArr];
     
     
